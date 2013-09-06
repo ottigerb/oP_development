@@ -11,7 +11,7 @@ from Ian's GitHub account onto somewhere on your computer.
 
 Also clone this repository (oP_development). 
 
-Copy `Vagrantfile.devel` to `Vagrantfile`
+Copy `Vagrantfile.example` to `Vagrantfile`
 
 Edit the Vagrantfile such that the synced folders for the repository
 (`survey-server`) come from the approriate directory on
