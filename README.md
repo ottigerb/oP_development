@@ -3,11 +3,9 @@ oP_development
 
 Development of openPsychotherapy
 
-clone the repository
+First install [Vagrant 1.2.x](http://www.vagrantup.com/). This may or may not work on Vagrant 1.3.0. Please try it.
 
-`survey-server`
-
-from Ian's GitHub account onto somewhere on your computer. 
+clone the repository `survey-server` from Ian's GitHub account onto somewhere on your computer. 
 
 Also clone this repository (oP_development). 
 
