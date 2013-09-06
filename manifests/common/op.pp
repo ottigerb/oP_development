@@ -8,9 +8,8 @@ class openpsychotherapy {
 
 class op_devel {
 	include common
-	include rednucleus_build
+	include op_build
 	include postgresql_bayhive
-	include rednucleus_stan
 
   	file { "/root/setup-build-env-ghc.sh":
 		content => template("/tmp/vagrant-puppet/manifests/files/setup-build-env-ghc.sh"),

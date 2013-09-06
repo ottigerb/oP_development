@@ -18,7 +18,6 @@ user { $user:
 import "/tmp/vagrant-puppet/manifests/defines.pp"
 import "/tmp/vagrant-puppet/manifests/common/*.pp"
 import "/tmp/vagrant-puppet/manifests/db/*.pp"
-import "/tmp/vagrant-puppet/manifests/rednucleus/*.pp"
 
 include op_devel
 
