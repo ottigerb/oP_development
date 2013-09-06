@@ -5,7 +5,6 @@ set -e
 
 GHCTAR=/opt/ghc/ghc-<%= ghcv %>.tar.bz2
 CABALTAR=/opt/ghc/cabal-install-<%= cabalinstallv %>.tar.gz
-GITROOT=git@github.com:glutamate
 
 mkdir -p /home/<%= user %>/tmp
 
@@ -41,9 +40,12 @@ echo
 cd /home/<%= user %>
 
 
-for REPO in bayeshive matio baysig-core baysig-exec bugsess probably-base
+for REPO in survey-server
 do
     echo ./$REPO >> sources.txt
+
+# these must be checked out on the host computer
+
 #    git clone $GITROOT/$REPO.git
 #    mkdir -p $BH_BASEDIR/$REPO/dist_bayeshive 
 #    cd $BH_BASEDIR/$REPO
