@@ -57,6 +57,6 @@ export PATH="$HOME/.cabal/bin:$PATH"
 
 cabal-meta install --force-reinstalls
 
-git clone -b devel-extra-deps https://github.com/ian-ross/yesod.git
-cd yesod/yesod-bin
-cabal install
+#git clone -b devel-extra-deps https://github.com/ian-ross/yesod.git
+#cd yesod/yesod-bin
+cabal install yesod-bin
