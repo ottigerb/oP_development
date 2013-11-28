@@ -40,7 +40,7 @@ echo
 cd /home/<%= user %>
 
 
-for REPO in survey-server
+for REPO in therapy-server
 do
     echo ./$REPO >> sources.txt
 
