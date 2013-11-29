@@ -4,9 +4,9 @@ class postgresql_bayhive {
     password  => 'lt4tad',
   }
 
-  postgresql::db { 'op_dev':
-    user      => 'bhiveprod',
-    password  => 'lt4tad',
+  postgresql::db { 'therapy-server':
+    user      => 'elise1',
+    password  => 'mypass',
   }
 
   postgresql::pg_hba_rule { 'puppet_connect_ident':
