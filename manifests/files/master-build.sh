@@ -1,26 +1,13 @@
 #!/bin/bash
 
-if [ -e /usr/local/rvm/scripts/rvm ]; then
-    source /usr/local/rvm/scripts/rvm
-    rvm use system
-fi
-
 set -e
 
-BH_BASEDIR=${BH_BASEDIR:-/home/<%= user %>/bayeshive-build}
+BH_BASEDIR=${BH_BASEDIR:-/home/<%= user %>/optinomic-build}
 /bin/su - <%= user %> -c "bash /home/<%= user %>/build.sh"
 
 cd "$BH_BASEDIR"
 
-declare -a arr=(bayeshive/BayesHive.keter \
-    bayeshive/misc/thumbnailer.js \
-    .hsenv_bayeshive/cabal/bin/runbays \
-    baysig-core/bugs/Distributions.bug \
-    baysig-core/bugs/Prelude.bug \
-    baysig-core/Baysig/JsBackend/prebaysig.js \
-    baysig-core/Baysig/JsBackend/trans.js \
-    baysig-exec/Baysig/Estimate/estimate.js \
-    bugsess/bugsess.js)
+declare -a arr=(therapy-server/therapy-server.keter)
 
 rm -rf md5sums
 

@@ -1,13 +1,10 @@
-class op_build {
+class rednucleus_build {
 	##################################
-	## OPENPSYCHOTHERAPY ##
+	## BUILDING RUNBAYS + BAYESHIVE ##
 	##################################
 
-	file { "/home/$user/setup-build-env-dev.sh":
-		content => template("/tmp/vagrant-puppet/manifests/files/setup-build-env-dev.sh"),
-		owner   => $user,
-      		mode   => 0755,
-		require => User["$user"]
+	file { "/usr/bin/hsenv":
+		source => "/tmp/vagrant-puppet/manifests/files/hsenv",
 	}
 
 	file { "/home/$user/setup-build-env.sh":
@@ -16,7 +13,15 @@ class op_build {
       		mode   => 0755,
 		require => User["$user"]
 	}
+
         
+	file { "/home/$user/setup-build-env-dev.sh":
+		content => template("/tmp/vagrant-puppet/manifests/files/setup-build-env-dev.sh"),
+		owner   => $user,
+      		mode   => 0755,
+		require => User["$user"]
+	}
+
 	file { "/home/$user/build.sh":
 		content => template("/tmp/vagrant-puppet/manifests/files/build.sh"),
 		owner   => $user,
@@ -24,9 +29,25 @@ class op_build {
 		require => User["$user"]
 	}
 
+       	file { "/home/$user/runrunbays.sh":
+		content => template("/tmp/vagrant-puppet/manifests/files/runrunbays.sh"),
+		owner   => $user,
+      		mode   => 0755,
+		require => User["$user"]
+	}
 
 	file { "/root/master-build.sh":
 		content => template("/tmp/vagrant-puppet/manifests/files/master-build.sh"),
+      		mode   => 0711,
+	}
+	file { "/home/$user/master-build-vagrant.sh":
+		content => template("/tmp/vagrant-puppet/manifests/files/master-build-vagrant.sh"),
+      		mode   => 0711,
+		owner   => "$user"
+
+	}
+	file { "/root/acceptance.sh":
+		content => template("/tmp/vagrant-puppet/manifests/files/acceptance.sh"),
       		mode   => 0711,
 	}
 
@@ -48,10 +69,5 @@ class op_build {
 	file { "/home/$user/build_backups":
 		ensure  => "directory",
 		require => User["$user"]
-	}
-
-     	file { "/root/setup-build-env-ghc.sh":
-		content => template("/tmp/vagrant-puppet/manifests/files/setup-build-env-ghc.sh"),
-	}
-        
+	}	
 }

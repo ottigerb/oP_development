@@ -12,7 +12,7 @@ class postgresql_bayhive {
   postgresql::pg_hba_rule { 'puppet_connect_ident':
     description => "allow local md5 connection",
     type => 'local',
-    database => 'bayhiveprod',
+    database => 'op_prod',
     user => 'all',
     auth_method => 'ident',
     order=>'001'

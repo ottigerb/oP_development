@@ -152,7 +152,7 @@ define supervisor_program(
         false   => absent,
         default => undef
       },
-      require => [Class["common_supervisor"], Exec["${name}_log_directory"]],
+      require => [Exec["${name}_log_directory"]],
     }
 
     # This exec will only be run when the supervisord/ .ini
@@ -162,8 +162,7 @@ define supervisor_program(
         command => "/usr/local/bin/supervisorctl update",
         logoutput => on_failure,
         refreshonly => true,
-        subscribe => File["/etc/supervisord/${name}.ini"],
-        require => Class["common_supervisor"],
+        subscribe => File["/etc/supervisord/${name}.ini"]
     }
 
 
@@ -192,7 +191,7 @@ define supervisor_program(
       start     => "echo \"Puppet starting $($program_name_command)\"          >> $supervisord_log_file && /usr/local/bin/supervisorctl start   $($program_name_command) >> $supervisord_log_file",
       status    => "echo \"Puppet getting status of $($program_name_command)\" >> $supervisord_log_file && /usr/local/bin/supervisorctl status | grep $($program_name_command) | sed -n '1p' | grep -q 'RUNNING'",
       stop      => "echo \"Puppet stopping $($program_name_command)\"          >> $supervisord_log_file && /usr/local/bin/supervisorctl stop    $($program_name_command) >> $supervisord_log_file",
-      require   => [Class["common_supervisor"], Exec["${name}_log_directory"], File["/etc/supervisord/${name}.ini"]],
+      require   => [Exec["${name}_log_directory"], File["/etc/supervisord/${name}.ini"]],
     }
 
     case $subscribe_program {
@@ -221,3 +220,5 @@ define download ($uri, $timeout = 300) {
 #              require => Package[ "wget" ],
       }
   }
+
+

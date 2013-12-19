@@ -1,0 +1,36 @@
+server {
+  listen *:80;
+  server_name bayeshive.com *.bayeshive.com;
+  access_log /var/log/nginx/bayeshive.com.access.log;
+  location / {
+    proxy_pass http://bayeshive_app;
+    proxy_read_timeout 90;
+  }
+  location /static {
+    root /opt/BayesHive/builds/current;
+    expires max;
+  }
+}
+
+server {
+  listen *:443;
+  server_name bayeshive.com *.bayeshive.com;
+  access_log /var/log/nginx/bayeshive.com.access.log;
+#  ssl on;
+#  ssl_certificate     /opt/ssl/bayeshive.pem;
+#  ssl_certificate_key /opt/ssl/bayeshive.key;
+#  ssl_session_timeout  5m;
+#  ssl_protocols  SSLv3 TLSv1;
+#  ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv3:+EXP;
+#  ssl_prefer_server_ciphers   on;
+  location / {
+    proxy_pass http://bayeshive_app;
+    proxy_read_timeout 90;
+  }
+  location /static {
+    root /opt/BayesHive/builds/current;
+    expires max;
+  }
+}
+
+

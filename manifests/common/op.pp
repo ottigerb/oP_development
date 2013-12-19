@@ -2,8 +2,6 @@ class openpsychotherapy {
 	include common
 	include op_build
 	include postgresql_bayhive
-
-
 }
 
 class op_devel {
@@ -11,11 +9,7 @@ class op_devel {
 	include op_build
 	include postgresql_bayhive
 
-  	file { "/root/setup-build-env-ghc.sh":
-		content => template("/tmp/vagrant-puppet/manifests/files/setup-build-env-ghc.sh"),
-	}
-
-	exec { "setup_build_env_ghc":
+      	exec { "setup_build_env_ghc":
 		command => "/bin/bash /root/setup-build-env-ghc.sh",
 		cwd     => "/root",
 		creates => "/usr/local/bin/ghc",
@@ -45,4 +39,14 @@ class op_devel {
                             Exec["setup_build_env_ghc"]]
 	}
           
+
+  
+}
+
+class op_deploy {
+	include common
+	include op_build
+	include postgresql_bayhive
+	include rednucleus_nginx
+        include mainapp
 }

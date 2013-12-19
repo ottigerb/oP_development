@@ -1,0 +1,10 @@
+server {
+	listen                *:80;
+  server_name           openbrain.co.uk;
+  access_log            /var/log/nginx/openbrain.co.uk.access.log;
+  location / {
+    root  /home/vagrant/bayeshive-build/openbrain-org/www;
+    index  index.html  index.htm  index.php ;
+  }
+}
+

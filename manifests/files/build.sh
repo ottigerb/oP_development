@@ -2,13 +2,13 @@
 
 set -e
 
-BH_BASEDIR=${BH_BASEDIR:-/home/<%= user %>/bayeshive-build}
+BH_BASEDIR=${BH_BASEDIR:-/home/<%= user %>/optinomic-build}
 echo "BUILDING IN $BH_BASEDIR..."
 cd "$BH_BASEDIR"
 
-source .hsenv_bayeshive/bin/activate
+source .hsenv_optinomic/bin/activate
 
-for REPO in bayeshive matio baysig-core baysig-exec bugsess probably-base capybayes; do
+for REPO in therapy-server; do
     cd "$BH_BASEDIR/$REPO"
     git pull
 done
@@ -16,9 +16,9 @@ done
 # Do build
 echo -n "BUILDING..."
 
-if [ $(find $BH_BASEDIR/bayeshive/ -newer /opt/keter/incoming/BayesHive.keter -regex ".*\.\(julius\|hamlet\|lucius\)" | wc -l) -gt 0 ]; then
+if [ $(find $BH_BASEDIR/therapy-server/ -newer /opt/keter/incoming/therapy-server.keter -regex ".*\.\(julius\|hamlet\|lucius\)" | wc -l) -gt 0 ]; then
     echo 'deleting build directory'
-    rm -rf $BH_BASEDIR/bayeshive/dist/build
+    rm -rf $BH_BASEDIR/therapy-server/dist/build
 fi
 
 cd "$BH_BASEDIR"
@@ -32,19 +32,12 @@ else
 fi
 
 echo -n "RUNNING YESOD..."
-cd "$BH_BASEDIR/bayeshive"
+cd "$BH_BASEDIR/therapy-server"
 yesod keter -n
 
-rsync -avr $BH_BASEDIR/bayeshive/help/ /var/bayeshive/1/Help/
-chown -R <%= user %> /var/bayeshive/1/Help/
 if [ $? -eq 0 ]; then
 	echo " done!"
 else
 	echo " failure!"
 	exit 1
 fi
-
-## we'll do these steps in a master-build script
-
-## cp /opt/keter/incoming/BayesHive.keter ~/BayesHive.keter.previous
-## cp $BH_BASEDIR/bayeshive/BayesHive.keter /opt/keter/incoming/

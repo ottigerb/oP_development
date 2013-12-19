@@ -51,3 +51,8 @@ cd ~/therapy-server/ && yesod devel
 now you can connect to localhost:3000 on you host machine.
 
 
+oP deployment
+=============
+
+change the manifest_file line in Vagrantfile to "deploy.pp" to get a
+fake-deployment enviroment in Vagrant.
